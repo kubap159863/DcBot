@@ -14,7 +14,7 @@ def init_db():
         name TEXT,
         time TEXT,
         category TEXT,
-        limit INTEGER,
+        participant_limit INTEGER,
         author_id INTEGER,
         closed INTEGER DEFAULT 0
     )

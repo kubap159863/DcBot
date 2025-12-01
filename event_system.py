@@ -8,7 +8,7 @@ class EventDB:
     def create_event(message_id, name, time, category, limit, author_id):
         conn = sqlite3.connect(DB_PATH)
         c = conn.cursor()
-        c.execute("INSERT INTO events (message_id, name, time, category, limit, author_id, closed) VALUES (?, ?, ?, ?, ?, ?, 0)",
+        c.execute("INSERT INTO events (message_id, name, time, category, participant_limit, author_id, closed) VALUES (?, ?, ?, ?, ?, ?, 0)",
                   (message_id, name, time, category, limit, author_id))
         conn.commit()
         conn.close()
@@ -26,7 +26,7 @@ class EventDB:
     def get_event_by_message(message_id):
         conn = sqlite3.connect(DB_PATH)
         c = conn.cursor()
-        c.execute("SELECT id, message_id, name, time, category, limit, author_id, closed FROM events WHERE message_id = ?", (message_id,))
+        c.execute("SELECT id, message_id, name, time, category, participant_limit, author_id, closed FROM events WHERE message_id = ?", (message_id,))
         row = c.fetchone()
         conn.close()
         return row
@@ -36,7 +36,7 @@ class EventDB:
         conn = sqlite3.connect(DB_PATH)
         c = conn.cursor()
         # get event_id
-        c.execute("SELECT id, limit, closed FROM events WHERE message_id = ?", (message_id,))
+        c.execute("SELECT id, participant_limit, closed FROM events WHERE message_id = ?", (message_id,))
         row = c.fetchone()
         if not row:
             conn.close()
