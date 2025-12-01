@@ -8,6 +8,9 @@ from discord.ext import commands, tasks
 from discord import app_commands
 from database import init_db
 from event_system import EventDB
+from keep_alive import keep_alive
+keep_alive()
+
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
